@@ -7,6 +7,7 @@ use_module(library(lists)).
 % Two among our number hold only nettle wine,
 % Three of us are killers, waiting hidden in line.
 % Choose, unless you wish to stay here for evermore,
+%
 % To help you in your choice, we give you these clues four:
 % First, however slyly the poison tries to hide
 % You will always find some on nettle wine’s left side;
@@ -26,5 +27,12 @@ use_module(library(lists)).
 
 % A list is valid if it contains the correct number of each of these potions
 is_valid(PotionList) :- 
-    permutation((ahead, back, wine, wine, poison, poison, poison), PotionList).
+    permutation([ahead, back, wine, wine, poison, poison, poison], PotionList).
 
+% 1st clue: left from nettle wine is always poison
+clue1([poison, wine|Rest]) :- 
+    clue1(Rest).
+clue1([Potion|Rest]) :-
+    Potion \= wine,
+    clue1(Rest).
+clue1([]).

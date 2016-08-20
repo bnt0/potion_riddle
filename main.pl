@@ -30,9 +30,21 @@ is_valid(PotionList) :-
     permutation([ahead, back, wine, wine, poison, poison, poison], PotionList).
 
 % 1st clue: left from nettle wine is always poison
+%   "First, however slyly the poison tries to hide
+%    You will always find some on nettle wine’s left side;"
 clue1([poison, wine|Rest]) :- 
     clue1(Rest).
 clue1([Potion|Rest]) :-
     Potion \= wine,
     clue1(Rest).
 clue1([]).
+
+% 2nd clue: first and last in list are different, and not ahead.
+%   "Second, different are those who stand at either end,
+%    But if you would move onwards, neither is your friend;"
+clue2([First|Rest]) :-
+    append(_, [Last], Rest),
+    First \= Last,
+    First \= ahead,
+    Last  \= ahead.
+

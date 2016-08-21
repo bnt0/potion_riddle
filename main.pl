@@ -48,3 +48,15 @@ clue2([First|Rest]) :-
     First \= ahead,
     Last  \= ahead.
 
+% 3rd clue: neither the biggest or the smallest is poison.
+%   "Third, as you see clearly, all are different size,
+%    Neither dwarf nor giant holds death in their insides;
+biggest(5).    % using 0-based indices
+smallest(2).
+clue3(List) :-
+    biggest(BiggestNum),
+    smallest(SmallestNum),
+    nth0(BiggestNum, List, BiggestPotion),
+    nth0(SmallestNum, List, SmallestPotion),
+    BiggestPotion \= poison,
+    SmallestPotion \= poison.

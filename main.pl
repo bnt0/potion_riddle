@@ -60,3 +60,20 @@ clue3(List) :-
     nth0(SmallestNum, List, SmallestPotion),
     BiggestPotion \= poison,
     SmallestPotion \= poison.
+
+% 4th clue: second and sixth are of the same kind.
+%   "Fourth, the second left and the second on the right
+%    Are twins once you taste them, though different at first sight."
+clue4(List) :-
+    nth1(2, List, SecondPotion),
+    nth1(6, List, SixthPotion),
+    SecondPotion = SixthPotion.
+
+% Solution
+solution(Potions) :-
+    is_valid(Potions), 
+    clue1(Potions),
+    clue2(Potions),
+    clue3(Potions),
+    clue4(Potions).
+
